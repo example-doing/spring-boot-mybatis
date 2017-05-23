@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
     <springProfile name="dev">
-        <appender name="LOGFILE" class="ch.qos.logback.core.ConsoleAppender">
-            <encoder>
-                <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
-            </encoder>
-        </appender>
+        <appender name="LOGFILE" class="ch.qos.logback.core.helpers.NOPAppender"/>
     </springProfile>
 
     <springProfile name="prod">
         <appender name="LOGFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
             <File>log/server.log</File>
-            <rollingPolicy
-                    class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
                 <FileNamePattern>log/server_%d{yyyy-MM-dd}.log.zip</FileNamePattern>
             </rollingPolicy>
             <layout class="ch.qos.logback.classic.PatternLayout">
@@ -21,9 +22,9 @@
         </appender>
     </springProfile>
 
-    <root level="info">
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
         <appender-ref ref="LOGFILE"/>
     </root>
-
-    <logger name="com.javachen.example" level="DEBUG"/>
 </configuration>

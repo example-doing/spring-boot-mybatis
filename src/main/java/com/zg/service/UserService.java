@@ -4,4 +4,6 @@ import com.zg.model.User;
 
 public interface UserService {
     User findByID(int id);
+
+    int insert(User user);
 }

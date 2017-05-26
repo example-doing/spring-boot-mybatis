@@ -4,17 +4,23 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonPropertyOrder({"code", "message", "result"})
 public class ResponseView<T> {
-    private final int code;
-    private final String message;
+    private int code;
+    private String message;
     private T result;
 
-    public ResponseView(ResponseCodeEnum code) {
+    public ResponseView(HttpCodeEnum code) {
         this(code, null);
     }
 
-    public ResponseView(ResponseCodeEnum code, T result) {
-        this.code = code.getCode();
-        this.message = code.getMessage();
+    public ResponseView(HttpCodeEnum code, T result) {
+        this.result = result;
+        if (code != null) {
+            this.code = code.getCode();
+            this.message = code.getMessage();
+        }
+    }
+
+    public void setResult(T result) {
         this.result = result;
     }
 
@@ -28,9 +34,5 @@ public class ResponseView<T> {
 
     public T getResult() {
         return result;
-    }
-
-    public void setResult(T result) {
-        this.result = result;
     }
 }

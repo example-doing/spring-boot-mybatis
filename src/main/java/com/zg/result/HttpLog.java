@@ -1,23 +1,23 @@
 package com.zg.result;
 
-public class HttpLog {
-    private long beginTime;
+class HttpLog {
+    private final long beginTime;
+    private final String ip;
+    private final String method;
+    private final String path;
+    private final String classMethod;
     private long endTime;
-    private String remoteIP;
-    private String method;
-    private String path;
-    private String classMethod;
     private int code;
 
-    public HttpLog(String remoteIP, String method, String path, String classMethod) {
-        this.remoteIP = remoteIP;
+    HttpLog(String ip, String method, String path, String classMethod) {
+        this.ip = ip;
         this.method = method;
         this.path = path;
         this.classMethod = classMethod;
         this.beginTime = System.currentTimeMillis();
     }
 
-    public void setCode(int code) {
+    void setCode(int code) {
         this.code = code;
         this.endTime = System.currentTimeMillis();
     }
@@ -25,11 +25,13 @@ public class HttpLog {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(this.code)
+        sb.append(this.method)
+                .append(" ")
+                .append(this.code)
                 .append(" ")
                 .append(this.endTime - this.beginTime)
                 .append("ms ")
-                .append(this.method)
+                .append(this.ip)
                 .append(" ")
                 .append(this.path)
                 .append(" ")

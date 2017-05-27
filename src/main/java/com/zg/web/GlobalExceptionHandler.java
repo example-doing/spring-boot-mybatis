@@ -13,9 +13,14 @@ public class GlobalExceptionHandler {
     private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    public ResponseView handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException ex) {
+    public ResponseView handleException(MethodArgumentTypeMismatchException e) {
+        e.printStackTrace();
         return new ResponseView<>(HttpCodeEnum.BAD_REQUEST);
     }
 
-
+    @ExceptionHandler(Exception.class)
+    public ResponseView handleException(Exception e) {
+        e.printStackTrace();
+        return new ResponseView<>(HttpCodeEnum.BAD_REQUEST);
+    }
 }

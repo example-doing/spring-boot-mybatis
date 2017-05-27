@@ -7,5 +7,6 @@ CREATE TABLE IF NOT EXISTS `user`(
   `id`  int unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(16) CHARACTER SET utf8mb4 NOT NULL,
   `age` int NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  unique key uniq_name(`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;

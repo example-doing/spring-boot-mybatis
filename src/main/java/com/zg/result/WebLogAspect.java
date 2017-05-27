@@ -16,9 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 @Aspect
 @Component
 public class WebLogAspect {
-    private Logger logger = LoggerFactory.getLogger(WebLogAspect.class);
+    private final static Logger logger = LoggerFactory.getLogger(WebLogAspect.class);
 
-    ThreadLocal<HttpLog> log = new ThreadLocal<>();
+    private final ThreadLocal<HttpLog> log = new ThreadLocal<>();
 
     @Pointcut("execution(public * com.zg.web..*.*(..))")
     public void webLog() {

@@ -13,7 +13,7 @@ public class UserDTO {
         return new UserDTO(user);
     }
 
-    public UserDTO(User user) {
+    UserDTO(User user) {
         this.id = user.getId();
         this.name = user.getName();
         this.age = user.getAge();

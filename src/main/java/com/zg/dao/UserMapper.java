@@ -7,7 +7,6 @@ import java.util.List;
 
 @Mapper
 public interface UserMapper {
-
     @Select("SELECT * FROM user;")
     List<User> list();
 
@@ -15,7 +14,7 @@ public interface UserMapper {
     User findByID(int id);
 
     @Insert("INSERT INTO user(name, age) VALUES (#{name}, #{age})")
-    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
+    @Options(useGeneratedKeys = true, keyColumn = "id")
     int insert(User user);
 
     @Update("UPDATE user SET name=#{name}, age=#{age} WHERE id=#{id}")

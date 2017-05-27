@@ -8,6 +8,7 @@ import com.zg.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.List;
 
 @RestController
 public class UserController {
-    private static Logger logger = LoggerFactory.getLogger(UserController.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserService userService;
@@ -46,12 +47,13 @@ public class UserController {
             result.add(UserDTO.fromUser(user));
         }
 
-        return new ResponseView<List<UserDTO>>(HttpCodeEnum.OK, result);
+        return new ResponseView<>(HttpCodeEnum.OK, result);
     }
 
+    @Transactional
     @RequestMapping(value = "/user/add", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseView<UserDTO> insertUser(@RequestBody UserDTO userDTO) {
+    public ResponseView<UserDTO> insertUser(@RequestBody UserDTO userDTO) throws Exception {
         logger.info(userDTO.toString());
         User user = userDTO.toUser();
         int ret = userService.insert(user);

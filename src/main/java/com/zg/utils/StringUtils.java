@@ -11,7 +11,7 @@ public class StringUtils {
     private StringUtils() {
     }
 
-    public String asString(Object o, boolean pretty) {
+    String asString(Object o, boolean pretty) {
         String str = null;
         try {
             if (pretty) {
@@ -20,6 +20,7 @@ public class StringUtils {
                 str = mapper.writeValueAsString(o);
             }
         } catch (JsonProcessingException e) {
+            // NON
         }
         return str;
     }
